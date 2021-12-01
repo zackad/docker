@@ -8,6 +8,7 @@ FROM php:$PHP_VERSION
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN apk add --no-cache autoconf pkgconf musl-dev make gcc zlib zlib-dev libpng libpng-dev libzip-dev icu icu-libs icu-dev nodejs yarn bash git ghostscript \
+	&& composer self-update \
 	&& pecl install pcov \
 	&& echo "extension=pcov.so" > /usr/local/etc/php/conf.d/pcov.ini \
 	&& docker-php-ext-install gd intl zip \
