@@ -1,8 +1,9 @@
-# Build with 'docker build -t YOUR_TAGNAME --build-args PHP_VERSION=your-selected-php-version-image .'
-ARG PHP_VERSION=php:8.0-cli-alpine
+# Build with 'docker build -t YOUR_TAGNAME --build-arg PHP_VERSION=8.1-cli-alpine --build-arg COMPOSER_VERSION=2.1.14 .'
+ARG PHP_VERSION=8.0-cli-alpine
+ARG COMPOSER_VERSION=2.1
 
-FROM composer:2 AS composer
-FROM $PHP_VERSION
+FROM composer:$COMPOSER_VERSION AS composer
+FROM php:$PHP_VERSION
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
