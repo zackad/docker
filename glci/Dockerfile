@@ -11,6 +11,7 @@ RUN apk add --no-cache autoconf pkgconf musl-dev make gcc zlib zlib-dev libpng l
 	&& composer self-update \
 	&& pecl install pcov \
 	&& echo "extension=pcov.so" > /usr/local/etc/php/conf.d/pcov.ini \
+	&& echo "memory_limit=256M" > /usr/local/etc/php/conf.d/memory_limit.ini \
 	&& docker-php-ext-install gd intl zip \
 	&& apk del zlib-dev libpng-dev icu-dev autoconf pkgconf musl-dev make gcc
 
