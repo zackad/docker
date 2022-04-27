@@ -6,6 +6,8 @@ FROM php:$PHP_VERSION
 RUN apk add --no-cache \
     autoconf \
     gcc \
+    libpng \
+    libpng-dev \
     libpq \
     libpq-dev \
     libzip-dev \
@@ -19,8 +21,8 @@ RUN apk add --no-cache \
     && pecl install pcov \
     && echo "extension=pcov.so" > /usr/local/etc/php/conf.d/pcov.ini \
     && echo "memory_limit=256M" > /usr/local/etc/php/conf.d/memory_limit.ini \
-    && docker-php-ext-install pdo pdo_pgsql zip \
-    && apk del autoconf gcc libpq-dev libzip-dev pkgconf \
+    && docker-php-ext-install gd pdo pdo_pgsql zip \
+    && apk del autoconf gcc libpng-dev libpq-dev libzip-dev pkgconf \
     && wget -O phive.phar "https://phar.io/releases/phive.phar" \
     && wget -O phive.phar.asc "https://phar.io/releases/phive.phar.asc" \
     && gpg --keyserver hkps://keys.openpgp.org --recv-keys 0x6AF725270AB81E04D79442549D8A98B29B2D5D79 \
