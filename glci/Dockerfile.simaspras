@@ -1,5 +1,5 @@
-# Build with 'docker build -t YOUR_TAGNAME --build-arg PHP_VERSION=8.1-cli-alpine .'
-ARG PHP_VERSION=8.1-cli-alpine
+# Build with 'docker build -t YOUR_TAGNAME --build-arg PHP_VERSION=8.2-cli-alpine .'
+ARG PHP_VERSION=8.2-cli-alpine
 
 FROM php:$PHP_VERSION
 
@@ -9,6 +9,7 @@ RUN apk add --no-cache \
 	gnupg \
 	icu \
 	icu-libs \
+	imagemagick \
 	libpng \
 	libpq \
 	nodejs \
@@ -30,11 +31,11 @@ RUN apk add --no-cache \
 	&& docker-php-ext-install gd intl pdo_pgsql zip \
 	&& apk del zlib-dev libpng-dev libpq-dev icu-dev autoconf pkgconf musl-dev make gcc \
 	&& wget -O phive.phar "https://phar.io/releases/phive.phar" \
-    && wget -O phive.phar.asc "https://phar.io/releases/phive.phar.asc" \
-    && gpg --keyserver hkps://keys.openpgp.org --recv-keys 0x6AF725270AB81E04D79442549D8A98B29B2D5D79 \
-    && gpg --verify phive.phar.asc phive.phar \
-    && rm phive.phar.asc \
-    && chmod +x phive.phar \
-    && mv phive.phar /usr/local/bin/phive
+	&& wget -O phive.phar.asc "https://phar.io/releases/phive.phar.asc" \
+	&& gpg --keyserver hkps://keys.openpgp.org --recv-keys 0x6AF725270AB81E04D79442549D8A98B29B2D5D79 \
+	&& gpg --verify phive.phar.asc phive.phar \
+	&& rm phive.phar.asc \
+	&& chmod +x phive.phar \
+	&& mv phive.phar /usr/local/bin/phive
 
 WORKDIR /app
