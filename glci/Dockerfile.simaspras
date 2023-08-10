@@ -1,4 +1,4 @@
-# Build with 'docker build -t YOUR_TAGNAME --build-arg PHP_VERSION=8.2-cli-alpine .'
+# Build with 'docker build -t YOUR_TAGNAME --build-arg PHP_VERSION=8.2-cli-alpine -f Dockerfile.simaspras .'
 ARG PHP_VERSION=8.2-cli-alpine
 
 FROM php:$PHP_VERSION
@@ -13,6 +13,7 @@ RUN apk add --no-cache \
 	libpng \
 	libpq \
 	nodejs \
+	openssh-client \
 	yarn \
 	zlib \
 	autoconf \
