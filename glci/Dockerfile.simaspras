@@ -17,6 +17,7 @@ RUN apk add --no-cache \
 	yarn \
 	zlib \
 	autoconf \
+	bash \
 	gcc \
 	make \
 	musl-dev \
